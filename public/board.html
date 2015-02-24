@@ -1,0 +1,97 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <link type="text/css" rel="stylesheet" href="frameworks/Bootstrap/css/bootstrap.min.css">
+    <link type="text/css" rel="stylesheet" href="frameworks/Bootstrap/css/bootstrap-theme.min.css">
+    <link type="text/css" rel="stylesheet" href="style/style.css">
+</head>
+<body>
+
+    <main id="main-view">
+        <div class="row">
+            <div class="col-xs-6 col-md-4 add-question-region add-answer-region"></div>
+            <div class="col-xs-12 col-md-8">
+                <div class="questionList questions-list-region answers-list-region"></div>
+            </div>
+        </div>
+    </main>
+
+    <!-- TEMPLATES-->
+    <script type="text/template" id="question-template">
+            <a href="#answers/<%=id%>">
+                <span class="question-text"><%=text%></span>
+                <span class="question-creator"><%=creator%></span>
+            </a>
+            <% if (active) { %>
+                <div class="deleteQuestion"><span class="glyphicon glyphicon-remove"></span></div>
+                <div class="changeQuestion"><span class="glyphicon glyphicon-pencil"></span></div>
+            <% } %>
+    </script>
+
+    <script type="text/template" id="add-question-template">
+        <div class="questionForm">
+            <form role="form" id="questionForm">
+                <div class="form-group">
+                    <textarea id="question" placeholder="Enter question" name="question" class="form-control"></textarea>
+                </div>
+
+                <button type="button" id="addQuestion" class="btn btn-primary">Add question</button>
+            </form>
+        </div>
+    </script>
+
+    <script type="text/template" id="answer-template">
+            <span class="answer-text"><%=text%></span>
+            <span class="answer-creator"><%=creator%></span>
+            <% if (active) { %>
+                <div class="deleteAnswer"><span class="glyphicon glyphicon-remove"></span></div>
+                <div class="changeAnswer"><span class="glyphicon glyphicon-pencil"></span></div>
+            <% } %>
+    </script>
+
+    <script type="text/template" id="add-answer-template">
+        <div class="answerForm">
+            <h3 class="open-question-text"><%=text%></h3>
+            <form role="form" id="answerForm">
+                <div class="form-group">
+                    <textarea id="answer" placeholder="Enter answer" name="answer" class="form-control"></textarea>
+                </div>
+
+                <button type="button" id="addAnswer" class="btn btn-primary">Add answer</button>
+            </form>
+        </div>
+    </script>
+
+    <script type="text/javascript" src="frameworks/jquery/jquery.js"></script>
+    <script type="text/javascript" src="frameworks/Underscore/underscore.js"></script>
+    <script type="text/javascript" src="frameworks/Backbone/backbone.js"></script>
+    <script type="text/javascript" src="frameworks/json2.js"></script>
+    <script type="text/javascript" src="frameworks/Backbone/backbone.babysitter.js"></script>
+    <script type="text/javascript" src="frameworks/Backbone/backbone.wreqr.js"></script>
+    <script type="text/javascript" src="frameworks/Backbone/backbone.marionette.js"></script>
+    <script type="text/javascript" src="frameworks/Bootstrap/js/bootstrap.js"></script>
+    <script type="text/javascript" src="frameworks/bootbox.min.js"></script>
+
+    <script type="text/javascript" src="js/QuestionsModule/Models/QuestionModel.js"></script>
+    <script type="text/javascript" src="js/QuestionsModule/Collections/QuestionsCollection.js"></script>
+    <script type="text/javascript" src="js/QuestionsModule/Views/QuestionView.js"></script>
+    <script type="text/javascript" src="js/QuestionsModule/Views/QuestionListView.js"></script>
+    <script type="text/javascript" src="js/QuestionsModule/Views/AddQuestionView.js"></script>
+    <script type="text/javascript" src="js/QuestionsModule/QuestionsModule.js"></script>
+
+    <script type="text/javascript" src="js/AnswersModule/Models/AnswerModel.js"></script>
+    <script type="text/javascript" src="js/AnswersModule/Collections/AnswersCollection.js"></script>
+    <script type="text/javascript" src="js/AnswersModule/Views/AnswerView.js"></script>
+    <script type="text/javascript" src="js/AnswersModule/Views/AnswerListView.js"></script>
+    <script type="text/javascript" src="js/AnswersModule/Views/AddAnswerView.js"></script>
+    <script type="text/javascript" src="js/AnswersModule/AnswersModule.js"></script>
+
+    <script type="text/javascript" src="js/Route.js"></script>
+    <script type="text/javascript" src="js/Application.js"></script>
+    <script type="text/javascript">
+        Application.start();
+    </script>
+</body>
+</html>

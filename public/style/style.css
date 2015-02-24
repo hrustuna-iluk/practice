@@ -1,0 +1,75 @@
+body {
+    background-image: url("../images/background.jpg");
+}
+
+a {
+    color: red;
+}
+main {
+    margin-top: 150px;
+}
+
+textarea {
+    resize: none;
+}
+
+.loginForm, .questionForm, .answerForm  {
+    padding: 30px;
+    background-color: rgba(0,0,0,0.7);
+    margin: 50px;
+    color: #ffffff;
+}
+.answerForm {
+    padding-top: 10px;
+}
+
+.registrationForm {
+    background-color: rgba(0,0,0,0.7);
+}
+
+.modalTitle {
+    color: #ffffff;
+}
+
+.questionList li {
+    color: #ffffff;
+    cursor: pointer;
+    background-color: rgba(0,0,0,0.7);
+}
+
+.questionList li:not(.non-active):hover {
+    background-color: rgba(0,0,0,0.9);
+}
+
+.questionList {
+    width: 700px;
+    margin: 50px 50px 50px 5px;
+}
+
+.deleteQuestion, .changeQuestion, .deleteAnswer, .changeAnswer {
+    float: right;
+    display: inline-table;
+    margin: 2px 5px 0 5px;
+}
+
+.deleteQuestion:hover, .changeQuestion:hover, .changeAnswer:hover, .deleteAnswer:hover {
+    color: dodgerblue;
+}
+
+.question-text, .answer-text {
+    font-size: 12pt;
+}
+
+.open-question-text {
+    font-size: 16pt;
+    font-style: italic;
+    margin-top: 0;
+}
+
+.questionList li.non-active {
+    background-color: rgba(63, 63, 63, 0.7);
+}
+
+.questionList li.non-active:hover {
+    background-color: rgba(63, 63, 63, 0.9);
+}
