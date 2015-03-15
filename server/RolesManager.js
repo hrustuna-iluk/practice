@@ -5,10 +5,10 @@ var LocalStrategy = require('passport-local').Strategy;
 
 var RolesManager = function () {
     var db = require('mongoose-simpledb').db;
-    var GroupModel = require('./models/GroupModel')(db);
+    var UserModel = require('./models/UserModel')();
     var roleManager = new ConnectRoles({
         failureHandler: function (req, res) {
-            res.redirect(401, '/login');
+            res.redirect(401, '/');
         }
     });
 
@@ -20,14 +20,14 @@ var RolesManager = function () {
 
     passport.use(new LocalStrategy(
         {
-            usernameField: 'name'
+            usernameField: 'email'
         },
-        function(name, password, done) {
-            GroupModel.getGroup({ name: name }, function (err, group) {
+        function(email, password, done) {
+            UserModel.getUser({ email: email }, function (err, user) {
                 if (err) { return done(err); }
-                if (!group) { return done(null, false); }
-                if (group.password !== md5(password)) { return done(null, false); }
-                return done(null, group);
+                if (!user) { return done(null, false); }
+                if (user.password !== md5(password)) { return done(null, false); }
+                return done(null, user);
             });
         }
     ));
@@ -37,7 +37,7 @@ var RolesManager = function () {
     });
 
     passport.deserializeUser(function(id, done) {
-        db.Groups.findById(id, function (err, group) {
+        db.Users.findById(id, function (err, group) {
             done(err, group);
         });
     });

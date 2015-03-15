@@ -3,7 +3,7 @@ var path = require('path');
 
 var AuthController = function(){
     var db = require('mongoose-simpledb').db;
-    var GroupModel = require('../models/GroupModel')(db);
+    var UserModel = require('../models/UserModel')();
 
     function authorizationFailed(req, res) {
         res.redirect('/login');
@@ -14,21 +14,29 @@ var AuthController = function(){
     }
 
     function login(req, res) {
-        res.json({ group: req.body.name });
+        UserModel.getUser({ email: req.body.email }, function (err, user) {
+            res.json({
+                email: user.email,
+                firstName: user.firstName,
+                lastName: user.lastName
+            });
+        });
     }
 
     function registration(req, res) {
-        var group = {
-            name: req.body.name,
+        var user = {
+            email: req.body.email,
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
             password: req.body.password
         };
 
-        GroupModel.save(group, function (err, group) {
+        UserModel.save(user, function (err, user) {
             if (err) {
                 res.status(400).end();
                 return;
             }
-            res.send(group.toJSON());
+            res.send(user.toJSON());
         });
     }
 

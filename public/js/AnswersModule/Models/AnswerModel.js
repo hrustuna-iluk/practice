@@ -1,28 +1,53 @@
-var AnswerModel = Backbone.Model.extend({
-    url: 'board/answer',
+define('AnswerModel', [
+    'QuestionModel'
+],
+    function(QuestionModel) {
+        var AnswerModel = Backbone.Model.extend({
+            urlRoot: 'board/answer',
+            idAttribute: '_id',
 
-    idAttribute: '_id',
+            defaults: function() {
+                return {
+                    text: '',
+                    creator: '',
+                    question: QuestionModel,
+                    status: 'created',
+                    whoDeleted: '',
+                    amountOfClicks: 0
+                }
+            },
 
-    defaults: function() {
-        return {
-            text: '',
-            creator: '',
-            question: QuestionModel,
-            active: true
-        }
-    },
+            changeStatus: function(value) {
+                this.set('status', value);
+            },
 
-    changeStatus: function() {
-        var status = this.get('active');
+            getText: function() {
+                return this.get('text');
+            },
 
-        this.set('active', !status);
-    },
+            getWhoDeleted: function() {
+                return this.get('whoDeleted');
+            },
 
-    getText: function() {
-        return this.get('text');
-    },
+            setWhoDeleted: function(value) {
+                this.set('whoDeleted', value)
+            },
 
-    isActive: function() {
-        return this.get('active');
-    }
-});
+            getStatus: function() {
+                return this.get('status');
+            },
+
+            incAmountOfClicks: function() {
+                this.set('amountOfClicks', this.get('amountOfClicks') + 1);
+            },
+
+            validate: function(attr) {
+                if (!/^(https?:\/\/[^\s]+)$/.test(attr.text)) {
+                    return 'Answer has to be the link!';
+                }
+            }
+        });
+
+        return AnswerModel;
+
+    });

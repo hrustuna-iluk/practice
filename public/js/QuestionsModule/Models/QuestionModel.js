@@ -1,29 +1,55 @@
-var QuestionModel = Backbone.Model.extend({
-    urlRoot: 'board/question',
+define('QuestionModel', [],
+    function() {
 
-    idAttribute: '_id',
+        var QuestionModel = Backbone.Model.extend({
+            urlRoot: 'board/question',
+            idAttribute: '_id',
 
-    defaults: function() {
-        return {
-            id: this.cid,
-            text: '',
-            rating: 0,
-            creator: '',
-            active: true
-        }
-    },
+            setUrl: function(params) {
+                this.urlRoot = _.template('board/question/<%=id%>')( params );
+                return this;
+            },
 
-    changeStatus: function() {
-        var status = this.get('active');
+            defaults: function() {
+                return {
+                    text: '',
+                    rating: 0,
+                    creator: '',
+                    status: 'created',
+                    whoDeleted: '',
+                    amountOfClicks: 0
+                }
+            },
 
-        this.set('active', !status);
-    },
+            getId: function() {
+                return this.id;
+            },
 
-    getText: function() {
-        return this.get('text');
-    },
+            changeStatus: function(value) {
+                this.set('status', value);
+            },
 
-    isActive: function() {
-        return this.get('active');
-    }
-});
+            getStatus: function() {
+                return this.get('status');
+            },
+
+            getWhoDeleted: function() {
+                return this.get('whoDeleted');
+            },
+
+            setWhoDeleted: function(value) {
+                this.set('whoDeleted', value)
+            },
+
+            getText: function() {
+                return this.get('text');
+            },
+
+            incAmountOfClicks: function() {
+                this.set('amountOfClicks', this.get('amountOfClicks') + 1);
+            }
+        });
+
+        return QuestionModel;
+
+    });

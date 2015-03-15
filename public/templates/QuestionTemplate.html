@@ -1,0 +1,13 @@
+<a href="#answers/<%=_id%>">
+    <span class="question-text"><%=text%></span>
+    <span class="question-creator">
+        <% if (status === 'created'){%><%=status%> by <%=creator%><% } %>
+        <% if (status === 'deleted'){%><%=status%> by <%=whoDeleted%><% } %>
+    </span>
+</a>
+<div class="actions">
+    <% if (status === 'created') { %>
+    <div class="deleteQuestion"><span class="glyphicon glyphicon-remove"></span></div>
+    <div class="changeQuestion"><span class="glyphicon glyphicon-pencil"></span></div>
+    <% } %>
+</div>

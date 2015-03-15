@@ -1,0 +1,12 @@
+<span title="Click me!" data-clipboard-text="<%=text%>" class="answer-text copy-clipboard"><%=text%></span>
+<span class="answer-creator">
+    <% if (status === 'created'){%><%=status%> by <%=creator%><% } %>
+    <% if (status === 'deleted'){%><%=status%> by <%=whoDeleted%><% } %>
+</span>
+
+<div class="actions">
+    <% if (status === 'created') { %>
+    <div class="deleteAnswer"><span class="glyphicon glyphicon-remove"></span></div>
+    <div class="changeAnswer"><span class="glyphicon glyphicon-pencil"></span></div>
+    <% } %>
+</div>

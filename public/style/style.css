@@ -1,16 +1,38 @@
 body {
     background-image: url("../images/background.jpg");
+    overflow: hidden;
 }
 
-a {
-    color: red;
-}
 main {
     margin-top: 150px;
 }
 
 textarea {
     resize: none;
+}
+
+.loading-container {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: auto;
+    background: rgba(0, 0, 0, 0.5);
+}
+.loading {
+    display: block;
+    border: none;
+}
+#logout {
+    position: absolute;
+    top: 0;
+    right: 10px;
+    float: right;
+    color: #ffffff;
 }
 
 .loginForm, .questionForm, .answerForm  {
@@ -32,7 +54,6 @@ textarea {
 }
 
 .questionList li {
-    color: #ffffff;
     cursor: pointer;
     background-color: rgba(0,0,0,0.7);
 }
@@ -46,14 +67,20 @@ textarea {
     margin: 50px 50px 50px 5px;
 }
 
-.deleteQuestion, .changeQuestion, .deleteAnswer, .changeAnswer {
-    float: right;
+.deleteQuestion, .changeQuestion, .makeDisabled, .deleteAnswer, .changeAnswer {
     display: inline-table;
-    margin: 2px 5px 0 5px;
+    margin: 0px 5px 0 5px;
 }
 
-.deleteQuestion:hover, .changeQuestion:hover, .changeAnswer:hover, .deleteAnswer:hover {
-    color: dodgerblue;
+
+.actions {
+    margin-top: -15px;
+    width: 70px;
+    float: right;
+}
+
+.deleteQuestion:hover, .changeQuestion:hover, .makeDisabled:hover, .changeAnswer:hover, .deleteAnswer:hover {
+    color: #ffffff;
 }
 
 .question-text, .answer-text {
@@ -66,10 +93,44 @@ textarea {
     margin-top: 0;
 }
 
-.questionList li.non-active {
+
+.questionList li a span, .questionList li span.answer-text, .questionList li span.answer-creator{
+    width: 350px;
+    display: inline-block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
+span.question-creator, span.answer-creator {
+    font-size: 8pt;
+}
+
+.questionList li a, .answer-text, .answer-creator {
+    color: #ffffff;
+}
+
+.questionList li.deleted a{
+    color: red;
+    pointer-events: none;
+}
+
+.questionList li.deleted {
+    cursor: default;
+}
+
+.questionList li.deleted span{
+    color: red;
+}
+
+.questionList li.non-active{
     background-color: rgba(63, 63, 63, 0.7);
 }
 
-.questionList li.non-active:hover {
+.questionList li.non-active:hover{
     background-color: rgba(63, 63, 63, 0.9);
+}
+.list-group {
+    height: 300px;
+    overflow: auto;
 }
